@@ -1,7 +1,6 @@
 import { readFile } from 'resource:///com/github/Aylur/ags/utils.js';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 const pkgjson = JSON.parse(readFile(App.configDir + '/package.json'));
-
 const v = {
     ags: `v${pkg.version}`,
     expected: `v${pkgjson.version}`,

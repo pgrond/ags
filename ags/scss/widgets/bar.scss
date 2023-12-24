@@ -44,6 +44,41 @@ $bar-spacing: $spacing / 2;
 }
 
 .panel {
+    .cpu {
+        color: $accent;
+    }
+
+    .ram {
+        color: $yellow;
+    }
+
+    .temp {
+        color: $magenta;
+    }
+
+    .disk {
+        color: $teal;
+    }
+
+    .high {
+        color: $red;
+    }
+
+    .system-resources-box {
+        margin: $spacing/2;
+
+        .circular-progress {
+            min-height: $spacing * 3;
+            min-width: $spacing * 3;
+            font-size: 0.2em;
+            background-color: $accent_fg;
+            image {
+                font-size: 4em;
+                color: $fg_color;
+            }
+        }
+    }
+
     @if $bar-style == 'normal' {
         background-color: $bg-color;
     }
@@ -124,36 +159,55 @@ $bar-spacing: $spacing / 2;
         image { color: $yellow; }
     }
 
-    .battery-bar {
-        .font-icon { font-size: 1.3em; }
 
-        image, .font-icon {
-            margin-right: $bar-spacing * .5;
-        }
-
-        levelbar trough {
+    @mixin panel-bar {
+        color: darken($fg_color, 30%);
+        image { margin-right: $spacing/2; }
+        progressbar trough {
             @include widget;
-            min-width: $battery-bar-width;
-            min-height: $battery-bar-height;
-
+            min-width: 60px;
+            min-height: 6px;
+            background: $accent_fg;
+            border-color: darken($fg_color, 30%);
+            progress {
+                border-radius: $radii;
+                min-height: 6px;
+                background-image: linear-gradient(to right, darken($fg_color, 30%), darken($fg_color, 20%));
+            }
             block.filled {
-                border-radius: max($radii - $border-width, 0);
-                background-image: $active-gradient;
+                border-radius: max($radii - $border_width, 0);
+                background-image: $active_gradient;
             }
         }
 
-        @mixin color($color) {
-            image, label { color: $color }
+    }
 
-            block.filled {
-                background-image: linear-gradient(to right, $color, lighten($color, 6%));
+    @mixin color($color) {
+        image, label, text { color: $color }
+
+        block.filled {
+            background-image: linear-gradient(to right, $color, lighten($color, 6%));
+        }
+        progressbar trough {
+            border-color: darken($color, 30%);
+            progress {
+                background-image: linear-gradient(to right, $color, lighten($color, 10%));
             }
         }
+    }
 
+
+    .disk-bar {
+        @include panel-bar;
+       .high { @include color($red) }
+    }
+
+    .battery-bar {
+        @include panel-bar;
         .medium { @include color($yellow) }
         .low { @include color($red) }
         .charging { @include color($green) }
-        &:active { @include color($accent-fg) }
+        &:active { @include color($accent_fg) }
     }
 
     .workspaces {
@@ -174,23 +228,22 @@ $bar-spacing: $spacing / 2;
             all: unset;
 
             .indicator {
-                font-size: 0;
-                min-width: 8px;
-                min-height: 8px;
+                min-height: 20px;
                 border-radius: $radii*0.6;
                 box-shadow: inset 0 0 0 $border-width $border-color;
                 margin: 0 $padding/2;
                 transition: $transition/2;
                 background-color: transparentize($fg-color, 0.8);
+                min-width: 20px;
             }
 
             &:last-child .indicator { margin-right: $padding; }
             &:first-child .indicator { margin-left: $padding; }
 
             &.occupied .indicator {
-                background-color: transparentize($fg-color, 0.2);
-                min-width: 10px;
-                min-height: 10px;
+                background-color: transparentize($fg-color, 0.5);
+                min-width: 20px;
+                min-height: 20px;
             }
 
             &:hover .indicator {
@@ -202,9 +255,39 @@ $bar-spacing: $spacing / 2;
             }
 
             &.active .indicator {
-                min-width: 24px;
+                min-width: 20px;
                 min-height: 16px;
             }
+        }
+    }
+
+    .counter {
+        font-size: 0.8em;
+        image { margin-right: $spacing/2; }
+        .font-icon {
+            margin-right: $spacing/2;
+            font-size: 1em;
+        }
+        label, image {
+            color: $red;
+        }
+        &.docker {
+            label, image {
+                color: $blue;
+            }
+        }
+        &.empty {
+            label, image {
+                color: darken($fg_color, 30%);
+            }
+        }
+    }
+
+    .active-task {
+        image { margin-right: $spacing; }
+        .font-icon {
+            margin-right: $spacing;
+            font-size: 1.2em;
         }
     }
 }
