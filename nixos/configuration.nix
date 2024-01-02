@@ -3,7 +3,7 @@
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./audio.nix
-    ./gnome.nix
+    # ./gnome.nix
     ./hyprland.nix
     ./laptop.nix
     ./locale.nix
@@ -20,6 +20,7 @@
   };
 
   # virtualisation
+  programs.virt-manager.enable = true;
   virtualisation = {
     podman.enable = true;
     libvirtd.enable = true;
@@ -66,6 +67,7 @@
       "networkmanager"
       "wheel"
       "audio"
+      "video"
       "libvirtd"
     ];
   };

@@ -1,9 +1,8 @@
 { pkgs, ... }:
 {
-  # hide entries
   xdg.desktopEntries = {
-    "ranger" = {
-      name = "ranger";
+    "lf" = {
+      name = "lf";
       noDisplay = true;
     };
   };
@@ -28,11 +27,11 @@
     teams-for-linux
     icon-library
     dconf-editor
+    figma-linux
 
     # tools
     bat
     eza
-    ranger
     fd
     ripgrep
     fzf
@@ -77,12 +76,10 @@
 
     # langs
     nodejs
-    go
     bun
-    sassc
+    go
+    gcc
     typescript
-    meson
-    ninja
     eslint
   ];
 }

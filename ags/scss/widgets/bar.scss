@@ -1,4 +1,5 @@
 $bar-spacing: $spacing / 2;
+$button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $radii);
 
 @mixin panel-button($flat: $bar-flat-buttons, $reactive: true){
     @include unset;
@@ -31,7 +32,11 @@ $bar-spacing: $spacing / 2;
         }
     } @else {
         @include accs-button($flat, $reactive);
-        > * { margin: $bar-spacing; }
+
+        > * {
+            border-radius: $button-radius;
+            margin: $bar-spacing;
+        }
     }
 
     label, image {
@@ -39,7 +44,7 @@ $bar-spacing: $spacing / 2;
     }
 
     > * {
-        padding: $padding * 0.4 $padding * 0.7;
+        padding: $padding * 0.4 $padding * 0.8;
     }
 }
 
@@ -93,6 +98,7 @@ $bar-spacing: $spacing / 2;
 
     @if $bar-style == 'floating' {
         @include floating-widget;
+        border-radius: $radii;
         margin: $wm-gaps;
         padding: 0;
     }
@@ -135,8 +141,8 @@ $bar-spacing: $spacing / 2;
     }
 
     .focused-client > box > box,
-    .quicksettings > box {
-        @include spacing(1, if($bar-spacing == 0, $padding / 2, $bar-spacing));
+    .quicksettings > box > box {
+        @include spacing($spacing: if($bar-spacing == 0, $padding / 2, $bar-spacing));
     }
 
     /* stylelint-disable-next-line selector-not-notation */
@@ -159,6 +165,13 @@ $bar-spacing: $spacing / 2;
         image { color: $yellow; }
     }
 
+
+    .battery-bar {
+        .font-icon { font-size: 1.15em; }
+
+        @if $battery-bar-full {
+            > box { padding: 0; }
+        }
 
     @mixin panel-bar {
         color: darken($fg_color, 30%);
@@ -196,7 +209,6 @@ $bar-spacing: $spacing / 2;
         }
     }
 
-
     .disk-bar {
         @include panel-bar;
        .high { @include color($red) }
@@ -210,13 +222,18 @@ $bar-spacing: $spacing / 2;
         &:active { @include color($accent_fg) }
     }
 
-    .workspaces {
-        > * { padding: 0; }
+        .whole-button {
+            label {
+                color: $fg-color;
+                text-shadow: $text-shadow;
+            }
 
-        .eventbox {
-            transition: $transition;
+            trough, block.filled {
+                border-radius: $button-radius;
+            }
 
             @if $bar-style == 'separated' {
+                trough { border: none; }
                 border-radius: max($radii - $border-width, 0);
                 &:hover { background-color: $hover; }
             } @else {
@@ -258,6 +275,49 @@ $bar-spacing: $spacing / 2;
                 min-width: 20px;
                 min-height: 16px;
             }
+        }
+    }
+
+
+    .workspaces button {
+        all: unset;
+
+        .indicator {
+            min-height: 20px;
+            border-radius: $radii*0.6;
+            box-shadow: inset 0 0 0 $border-width $border-color;
+            margin: 0 $padding/2;
+            transition: $transition/2;
+            background-color: transparentize($fg-color, 0.8);
+            min-width: 20px;
+        }
+
+        &.occupied .indicator {
+            background-color: transparentize($fg-color, 0.2);
+            min-width: 10px;
+            min-height: 10px;
+        }
+
+        &:hover .indicator {
+            box-shadow: inset 0 0 0 10px transparentize($fg-color, 0.8);
+        }
+        &.occupied .indicator {
+            background-color: transparentize($fg-color, 0.5);
+            min-width: 20px;
+            min-height: 20px;
+        }
+
+        &.active .indicator, &:active .indicator {
+            background-color: $accent;
+        }
+
+        &.active .indicator, &:active .indicator {
+            background-color: $accent;
+        }
+
+        &.active .indicator {
+            min-width: 20px;
+            min-height: 16px;
         }
     }
 

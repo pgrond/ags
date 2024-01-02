@@ -8,7 +8,6 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
-    enableNvidiaPatches = true;
   };
 
   xdg.portal = {
@@ -21,14 +20,17 @@
   };
 
   environment.systemPackages = with pkgs.gnome; [
+    pkgs.loupe
     adwaita-icon-theme
     nautilus
+    baobab
     gnome-calendar
     gnome-boxes
     gnome-system-monitor
     gnome-control-center
     gnome-weather
     gnome-calculator
+    gnome-clocks
     gnome-software # for flatpak
   ];
 
@@ -53,6 +55,7 @@
     devmon.enable = true;
     udisks2.enable = true;
     upower.enable = true;
+    power-profiles-daemon.enable = true;
     accounts-daemon.enable = true;
     gnome = {
       evolution-data-server.enable = true;

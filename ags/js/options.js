@@ -183,8 +183,10 @@ export default {
             'category': 'exclude',
         }),
         bar: {
+            show_icon: Option(true, { 'category': 'Bar' }),
             width: Option(70, { 'category': 'Bar' }),
             height: Option(14, { 'category': 'Bar' }),
+            full: Option(false, { 'category': 'Bar' }),
         },
         low: Option(30, { 'category': 'Bar' }),
         medium: Option(50, { 'category': 'Bar' }),

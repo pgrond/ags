@@ -12,11 +12,15 @@
     hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
     ags.url = "github:Aylur/ags";
     lf-icons = {
-      url = "https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example";
+      url = "github:gokcehan/lf";
       flake = false;
     };
     more-waita = {
-      url = "https://github.com/somepaulo/MoreWaita/archive/refs/heads/main.zip";
+      url = "github:somepaulo/MoreWaita";
+      flake = false;
+    };
+    firefox-gnome-theme = {
+      url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;
     };
   };

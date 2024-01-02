@@ -5,13 +5,14 @@ in
 {
   imports = [
     ./ags.nix
-    ./bspwm.nix
     ./blackbox.nix
     ./browser.nix
+    ./bspwm.nix
     ./dconf.nix
     ./git.nix
     ./hyprland.nix
     ./lf.nix
+    ./mimelist.nix
     ./neofetch.nix
     ./neovim.nix
     ./packages.nix
@@ -40,7 +41,7 @@ in
     sessionVariables = {
       QT_XCB_GL_INTEGRATION = "none"; # kde-connect
       NIXPKGS_ALLOW_UNFREE = "1";
-      SHELL = "${pkgs.zsh}/bin/zsh";
+      NIXPKGS_ALLOW_INSECURE = "1";
       BAT_THEME = "base16";
       GOPATH = "${homeDirectory}/.local/share/go";
       GOMODCACHE="${homeDirectory}/./go/pkg/mod";

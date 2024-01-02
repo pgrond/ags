@@ -14,7 +14,7 @@
       open = ''''${{
         case $(file --mime-type -Lb $f) in
             text/*) lf -remote "send $id \$$EDITOR \$fx";;
-            *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+            *) for f in $fx; do $OPENER "$f" > /dev/null 2> /dev/null & done;;
         esac
       }}'';
 
@@ -96,5 +96,5 @@
     '';
   };
 
-  xdg.configFile."lf/icons".source = inputs.lf-icons;
+  xdg.configFile."lf/icons".source = "${inputs.lf-icons}/etc/icons.example";
 }

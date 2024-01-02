@@ -12,6 +12,7 @@ return {
                 "html",
                 "javascript",
                 "json",
+                "jsdoc",
                 "yaml",
                 "svelte",
                 "scss",
@@ -23,9 +24,6 @@ return {
                 "luadoc",
                 "luap",
 
-                "markdown",
-                "markdown_inline",
-
                 "python",
                 "query",
                 "regex",
@@ -33,8 +31,30 @@ return {
                 "vimdoc",
 
                 -- FIXME: remove after uni
-                "java",
                 "sql",
+            },
+        },
+    },
+    {
+        "neovim/nvim-lspconfig",
+        opts = {
+            servers = {
+                bashls = {},
+                clangd = {},
+                cssls = {},
+                eslint = {},
+                stylelint_lsp = {},
+                html = {},
+                svelte = {},
+                tsserver = {},
+                nil_ls = {},
+                lua_ls = {},
+                gopls = {},
+                ruff_lsp = {},
+                nushell = {},
+
+                -- FIXME: remove after uni
+                sqlls = {},
             },
         },
     },
