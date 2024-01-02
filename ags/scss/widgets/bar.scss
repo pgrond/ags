@@ -219,7 +219,7 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
         .medium { @include color($yellow) }
         .low { @include color($red) }
         .charging { @include color($green) }
-        &:active { @include color($accent-fg) }
+        &:active { @include color($accent_fg) }
     }
 
         .whole-button {
@@ -234,6 +234,46 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
 
             @if $bar-style == 'separated' {
                 trough { border: none; }
+                border-radius: max($radii - $border-width, 0);
+                &:hover { background-color: $hover; }
+            } @else {
+                @include button($flat: true);
+            }
+        }
+
+        button {
+            all: unset;
+
+            .indicator {
+                min-height: 20px;
+                border-radius: $radii*0.6;
+                box-shadow: inset 0 0 0 $border-width $border-color;
+                margin: 0 $padding/2;
+                transition: $transition/2;
+                background-color: transparentize($fg-color, 0.8);
+                min-width: 20px;
+            }
+
+            &:last-child .indicator { margin-right: $padding; }
+            &:first-child .indicator { margin-left: $padding; }
+
+            &.occupied .indicator {
+                background-color: transparentize($fg-color, 0.5);
+                min-width: 20px;
+                min-height: 20px;
+            }
+
+            &:hover .indicator {
+                box-shadow: inset 0 0 0 10px transparentize($fg-color, 0.8);
+            }
+
+            &.active .indicator, &:active .indicator {
+                background-color: $accent;
+            }
+
+            &.active .indicator {
+                min-width: 20px;
+                min-height: 16px;
             }
         }
     }

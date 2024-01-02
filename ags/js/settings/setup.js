@@ -24,6 +24,7 @@ export function init() {
     hyprlandInit();
     setupHyprland();
     wallpaper();
+    // showAbout();
 }
 
 function dependandOptions() {
