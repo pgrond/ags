@@ -165,6 +165,7 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
         image { color: $yellow; }
     }
 
+
     .battery-bar {
         .font-icon { font-size: 1.15em; }
 
@@ -207,7 +208,6 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
             }
         }
     }
-
 
     .disk-bar {
         @include panel-bar;
@@ -277,6 +277,7 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
             }
         }
     }
+
 
     .workspaces button {
         all: unset;
